@@ -5,7 +5,6 @@ type RequestOptions = {
   method: HttpMethod;
   headers?: Record<string, string>;
   body?: any;
-  mode?: RequestMode
 };
 
 export type ApiResponse<T> = {
@@ -18,16 +17,14 @@ export type ApiResponse<T> = {
     options: RequestOptions,
   ): Promise<ApiResponse<T>> {
     try {
-      const { method, headers = {}, body, mode } = options;
+      const { method, headers = {}, body } = options;
       let apiFullUrl = '';
-      console.log('mode', mode);
   
       const requestOptions: RequestInit = {
         method,
         headers: {
           ...headers,
-        },
-        mode: mode
+        }
       };
   
       if (body) {
@@ -59,7 +56,7 @@ async function getRequest<T>(
     headers?: Record<string, string>,
     mode?: any
   ): Promise<ApiResponse<T>> {
-    return makeApiRequest<T>(urlPath, { method: 'GET', headers, mode: mode?.mode },);
+    return makeApiRequest<T>(urlPath, { method: 'GET', headers },);
   }
   
   async function postRequest<T>(
