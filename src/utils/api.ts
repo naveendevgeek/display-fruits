@@ -34,22 +34,15 @@ export type ApiResponse<T> = {
         requestOptions.body = JSON.stringify(body);
       }
 
-      apiFullUrl = urlPath;
-  
-    //   if (process.env.NODE_ENV === 'production') {
-    //     apiFullUrl = new URL(`/api/${urlPath}`, process.env.EXPO_PUBLIC_URL_PRODUCTION).toString();
-    //   } else {
-    //     apiFullUrl = new URL(`/api/${urlPath}`, process.env.EXPO_PUBLIC_HORIZON_BASE_URL).toString();
-    //   }
-  
+      console.log('process.env.NODE_ENV', process.env.NODE_ENV, process.env.REACT_APP_FRUITS_API_BASE_URL);
+      apiFullUrl = new URL(`/api/v1/${urlPath}`, process.env.REACT_APP_FRUITS_API_BASE_URL).toString();  
       console.info(`Making a ${method} request to the ${apiFullUrl}`);
   
       const response = await fetch(apiFullUrl, requestOptions);
   
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    //   }
-      console.log('response>>>>>>>>>>>>>>', response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       return { data, error: null };
     } catch (error) {
@@ -110,5 +103,5 @@ async function getRequest<T>(
   };
 
 export const ApiRoutes = {
-    GET_FRIUTS: 'https://wcz3qr33kmjvzotdqt65efniv40kokon.lambda-url.us-east-2.on.aws',
+    GET_FRIUTS: 'get-fruits',
 } as const;

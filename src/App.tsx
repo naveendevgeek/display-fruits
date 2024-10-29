@@ -1,8 +1,9 @@
-import ExampleComponent from './components/ExampleComponent';
+import DisplayFruits from './features/home/DisplayFruits';
+import './index.css';
 
 function App() {
   return (
-    <ExampleComponent />
+    <DisplayFruits />
   );
 }
 
