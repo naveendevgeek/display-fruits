@@ -1,22 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FruitState {
-    data: object[];
-  }
-  
-  const initialState: FruitState = {
-    data: [],
-  };
+  data: any[];
+  fruitsGroupByFamily: string[];
+  fruitsGroupByOrder: string[];
+  fruitsGroupByGenus: string[];
 
-const fruitSlice = createSlice({
+}
+
+const initialState: FruitState = {
+  data: [],
+  fruitsGroupByFamily: [],
+  fruitsGroupByOrder: [],
+  fruitsGroupByGenus: []
+};
+
+const fruitsSlice = createSlice({
   name: 'fruits',
   initialState,
   reducers: {
-    fetchDataSuccess(state, action: PayloadAction<object[]>) {
+    fetchDataSuccess(state, action: PayloadAction<any[]>) {
       state.data = action.payload;
+    },
+    setFruitsGroupByFamily(state, action: PayloadAction<any[]>) {
+      state.fruitsGroupByFamily = action.payload;
+    },
+    setFruitsGroupByOrder(state, action: PayloadAction<any[]>) {
+      state.fruitsGroupByOrder = action.payload;
+    },
+    setFruitsGroupByGenus(state, action: PayloadAction<any[]>) {
+      state.fruitsGroupByGenus = action.payload;
     },
   },
 });
 
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export default fruitSlice.reducer;
+export const { fetchDataSuccess, setFruitsGroupByFamily, setFruitsGroupByOrder, setFruitsGroupByGenus } = fruitsSlice.actions;
+export default fruitsSlice.reducer;
