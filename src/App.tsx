@@ -1,4 +1,3 @@
-import SampleButton from './components/Button';
 import DisplayFruits from './features/home/DisplayFruits';
 import './index.css';
 
